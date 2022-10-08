@@ -1,5 +1,7 @@
 class Menu
+  #best practice to keep readers and writers separate 
   attr_reader :meal, :print_order
+  # writers can take in input and then "spit" it out
   attr_writer :spicy_level, :good
 
   
@@ -41,3 +43,27 @@ p menu1.meal
 
 p menu1.good=(false)
 p menu1
+
+menu2 = Menu.new({order_number: 5, meal: "Pizza", spicy_level: 2, price: 11, good: false})
+
+
+p menu2
+menu2.add_spice
+p menu2
+
+# inheritance 
+# can only inherit one class but you can build a chain of inheritrance for example: Employee, Assistant_manager < Employee, Manager < Assistant_manager
+class Secret_Menu < Menu
+  def initialize(input_options)
+    super
+    @happy_meal_toy = input_options[:happy_meal_toy] 
+  end 
+  def free_icecream_cone
+    p "You are a secret icecream winner"
+  end 
+end
+
+secret1 = Secret_Menu.new({order_number: 5, meal: "Pizza", spicy_level: 2, price: 11, good: false, happy_meal_toy: "legos"})
+secret1.free_icecream_cone
+secret1.print_order
+p secret1
